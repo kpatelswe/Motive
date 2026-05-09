@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     redis_url: str
     google_client_id: str
     google_client_secret: str
+    google_redirect_uri: str
     jwt_secret: str
     jwt_algorithm: str = "HS256"
 
