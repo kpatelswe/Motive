@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 
+from app.routers import auth
+
 app = FastAPI(title="Motive")
+
+app.include_router(auth.router)
 
 @app.get("/")
 def root():
