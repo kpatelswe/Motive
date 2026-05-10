@@ -1,4 +1,5 @@
-from app.models.base import Base, Vibe, PriceTier, HangoutStatus, PlaceSource
+from app.models.base import Base, CoverageJobStatus, Vibe, PriceTier, HangoutStatus, PlaceSource
+from app.models.coverage import CoverageJob
 from app.models.user import User
 from app.models.place import Place
 from app.models.hangout import HangoutRequest, GeneratedPlan, PlanStop
@@ -10,6 +11,8 @@ __all__ = [
     "PriceTier",
     "HangoutStatus",
     "PlaceSource",
+    "CoverageJobStatus",
+    "CoverageJob",
     "User",
     "Place",
     "HangoutRequest",

@@ -33,6 +33,12 @@ class PlaceSource(str, Enum):
     MANUAL = "manual"
     SCRAPED = "scraped"
 
+class CoverageJobStatus(str, Enum):
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+
 class UUIDMixin:
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
 
