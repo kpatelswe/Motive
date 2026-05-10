@@ -58,3 +58,8 @@ class HangoutRequestWithPlansOut(HangoutRequestOut):
 
 class PlanSelectionRequest(BaseModel):
     plan_id: UUID
+
+class HangoutRequestStatusOut(BaseModel):
+    request: HangoutRequestWithPlansOut
+    message: str | None = None
+    coverage_job_id: UUID | None = None
