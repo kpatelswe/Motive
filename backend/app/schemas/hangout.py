@@ -6,7 +6,6 @@ from pydantic import BaseModel, Field
 from app.models.base import HangoutStatus, PriceTier, Vibe
 from app.schemas.place import PlaceOut
 
-
 class HangoutRequestCreate(BaseModel):
     location_text: str
     vibe: Vibe
@@ -15,10 +14,15 @@ class HangoutRequestCreate(BaseModel):
     preferred_datetime: datetime | None = None
     group_size: int | None = Field(default=None, gt=0)
 
-
 class HangoutRequestOut(BaseModel):
     id: UUID
     location_text: str
+    resolved_city: str | None = None
+    resolved_region: str | None = None
+    resolved_country: str | None = None
+    coverage_key: str | None = None
+    latitude: float | None = None
+    longitude: float | None = None
     vibe: Vibe
     price_tier: PriceTier
     duration_minutes: int
@@ -29,7 +33,6 @@ class HangoutRequestOut(BaseModel):
 
     model_config = {"from_attributes": True}
 
-
 class PlanStopOut(BaseModel):
     stop_order: int
     duration_minutes: int | None
@@ -37,7 +40,6 @@ class PlanStopOut(BaseModel):
     place: PlaceOut
 
     model_config = {"from_attributes": True}
-
 
 class GeneratedPlanOut(BaseModel):
     id: UUID
@@ -51,10 +53,8 @@ class GeneratedPlanOut(BaseModel):
 
     model_config = {"from_attributes": True}
 
-
 class HangoutRequestWithPlansOut(HangoutRequestOut):
     plans: list[GeneratedPlanOut]
-
 
 class PlanSelectionRequest(BaseModel):
     plan_id: UUID

@@ -8,13 +8,11 @@ from sqlalchemy.sql import func
 
 Base = declarative_base()
 
-
 class Vibe(str, Enum):
     CHILL = "chill"
     HYPE = "hype"
     ROMANTIC = "romantic"
     OUTDOORSY = "outdoorsy"
-
 
 class PriceTier(str, Enum):
     LOW = "low"       # $
@@ -22,23 +20,21 @@ class PriceTier(str, Enum):
     HIGH = "high"     # $$$
     LUXURY = "luxury" # $$$$
 
-
 class HangoutStatus(str, Enum):
     PENDING = "pending"
+    COVERAGE_PENDING = "coverage_pending"
+    GENERATING = "generating"
     GENERATED = "generated"
     SELECTED = "selected"
     COMPLETED = "completed"
     CANCELLED = "cancelled"
 
-
 class PlaceSource(str, Enum):
     MANUAL = "manual"
     SCRAPED = "scraped"
 
-
 class UUIDMixin:
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-
 
 class TimestampMixin:
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, Enum, Float, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -11,6 +11,12 @@ class HangoutRequest(UUIDMixin, TimestampMixin, Base):
 
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     location_text = Column(String, nullable=False)
+    resolved_city = Column(String, nullable=True)
+    resolved_region = Column(String, nullable=True)
+    resolved_country = Column(String, nullable=True)
+    coverage_key = Column(String, nullable=True, index=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     vibe = Column(Enum(Vibe), nullable=False)
     price_tier = Column(Enum(PriceTier), nullable=False)
     duration_minutes = Column(Integer, nullable=False)
@@ -20,7 +26,6 @@ class HangoutRequest(UUIDMixin, TimestampMixin, Base):
 
     user = relationship("User", back_populates="hangout_requests")
     plans = relationship("GeneratedPlan", back_populates="request", cascade="all, delete-orphan")
-
 
 class GeneratedPlan(UUIDMixin, Base):
     __tablename__ = "generated_plans"
@@ -42,7 +47,6 @@ class GeneratedPlan(UUIDMixin, Base):
         cascade="all, delete-orphan",
     )
     rating = relationship("PlanRating", back_populates="plan", uselist=False)
-
 
 class PlanStop(UUIDMixin, Base):
     __tablename__ = "plan_stops"
